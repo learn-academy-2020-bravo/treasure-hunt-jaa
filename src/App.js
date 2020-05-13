@@ -28,7 +28,7 @@ class App extends Component{
 
     var stuff = ["treasure", "bomb", "tree", "tree", "tree", "tree", "tree", "tree", "tree"];
     shuffle(stuff);
-    console.log(stuff);
+
 
     this.state = {
       squares: ["?", "?", "?", "?", "?", "?", "?", "?", "?"],
@@ -37,11 +37,17 @@ class App extends Component{
     }
   }
 
-  handleChange = (ind) => {
-    // var hiddenStuff = this.state.hiddenStuff
-    var squares = this.state.squares
-    squares[ind] = this.state.hiddenStuff[ind]
+  handleChange = (index) => {
+    console.log('changing yo')
+    var squares = [...this.state.squares]
+    squares[index] = this.state.hiddenStuff[index]
     this.setState({squares: squares})
+  }
+
+  handleClear = () => {
+    var stuff = ["treasure", "bomb", "tree", "tree", "tree", "tree", "tree", "tree", "tree"];
+    shuffle(stuff);
+    this.setState({squares: ["?", "?", "?", "?", "?", "?", "?", "?", "?"], hiddenStuff: stuff})
   }
 
 
@@ -50,7 +56,7 @@ class App extends Component{
   render(){
     let square = this.state.squares.map((value, index) => {
       return (
-        <Square value={value} index={index} key={index} click={this.handleChange}/>
+        <Square value={value} index={index} key={index} parentClick={this.handleChange}/>
       )
     })
     return(
@@ -59,6 +65,7 @@ class App extends Component{
 
         <div id="game-board">
           {square}
+        <button onClick={this.handleClear}>Reset</button>
 
         </div>
       </React.Fragment>

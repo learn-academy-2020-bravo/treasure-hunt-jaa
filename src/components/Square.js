@@ -4,10 +4,13 @@ class Square extends Component{
   constructor(props){
     super(props)
   }
+  handleClick = () => {
+    this.props.parentClick(this.props.index)
+  }
   render(){
     return(
       <React.Fragment>
-      <div id="square" onClick={this.props.click(this.props.index)}>
+      <div className="square" id={this.props.index.toString()} onClick={this.handleClick}>
       {this.props.value}
       </div>
 
