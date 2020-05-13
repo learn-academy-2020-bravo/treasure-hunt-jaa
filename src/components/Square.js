@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
 class Square extends Component{
-  
-  handleClick = () => {   
+
+  handleClick = () => {
     this.props.parentClick(this.props.index)
 
   }

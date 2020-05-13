@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import Square from './components/Square'
-
+const emoji = require("emoji-dictionary")
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -25,7 +25,7 @@ class App extends Component{
   constructor(props){
     super(props)
 
-    var stuff = ["treasure", "bomb", "tree", "tree", "tree", "tree", "tree", "tree", "tree"];
+    var stuff = [(emoji.getUnicode("unicorn")), (emoji.getUnicode("poop")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse"))];
     function shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -46,39 +46,50 @@ class App extends Component{
     }
 
     shuffle(stuff);
-
-
+// const emoji = require("emoji-dictionary")
+// console.log);
 
     this.state = {
       squares: ["?", "?", "?", "?", "?", "?", "?", "?", "?"],
-     // currentPosition: "",
       hiddenStuff: stuff,
       count: 6
     }
   }
 
-  
+
 
   handleChange = (index) => {
     var squares = [...this.state.squares]
     squares[index] = this.state.hiddenStuff[index]
-    this.setState({squares: squares, count: this.state.count-1} )
-  
-    if (squares[index] === "treasure") {
-         alert("you win")
-      
-       }
-         else if (squares[index] === "bomb") {
-         alert("you lose")
+    this.setState({squares: squares, count: this.state.count-1},
+    () => {
+
+      if (squares[index] === (emoji.getUnicode("unicorn"))) {
+        setTimeout(() => {
+          alert("you win")
+           this.handleClear()
+        }, 300)
+
+         }
+           else if (squares[index] === (emoji.getUnicode("poop"))) {
+             setTimeout(() => {
+               alert("you lose")
+                this.handleClear()
+             }, 300)
+
+          }
+           else if (this.state.count === 0) {
+             setTimeout(() => {
+               alert("you suck")
+                this.handleClear()
+             }, 300)
+
         }
-         else if (this.state.count === 0) {
-           alert("you suck at this")}
-           
-      }
-      
+    } )
+  }
 
   handleClear = () => {
-    var stuff = ["treasure", "bomb", "tree", "tree", "tree", "tree", "tree", "tree", "tree"];
+    var stuff = [(emoji.getUnicode("unicorn")), (emoji.getUnicode("poop")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse")), (emoji.getUnicode("horse"))];
     shuffle(stuff);
     this.setState({squares: ["?", "?", "?", "?", "?", "?", "?", "?", "?"], hiddenStuff: stuff})
     this.setState({count: 6})
@@ -92,12 +103,12 @@ class App extends Component{
     })
     return(
       <React.Fragment>
-        <h1>Treasure Hunt App</h1>
+        <h1>Unicorn Hunt App</h1>
 
         <div id="game-board">
           {square}
-        <button onClick={this.handleClear}>Play Again</button>
-    <p>You have this many counts left: { this.state.count }</p>
+        <button id="button" onClick={this.handleClear}>Play Again</button>
+    <p id="count">You have this many counts left: { this.state.count }</p>
         </div>
       </React.Fragment>
     )
