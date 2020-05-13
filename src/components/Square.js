@@ -4,7 +4,7 @@ class Square extends Component{
   constructor(props){
     super(props)
   }
-  handleClick = () => {
+  handleClick = () => {   
     this.props.parentClick(this.props.index)
   }
   render(){
