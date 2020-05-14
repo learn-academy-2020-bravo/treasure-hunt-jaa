@@ -98,7 +98,7 @@ class App extends Component{
   render(){
     let square = this.state.squares.map((value, index) => {
       return (
-        <Square value={value} index={index} key={index} parentClick={this.handleChange}/>
+        <Square value={value} key={index} onClick={() => this.handleChange(index)}/>
       )
     })
     return(
